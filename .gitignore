@@ -1,28 +1,27 @@
-# Dados da empresa — nunca versionar. Use dados-empresa.exemplo.md como modelo.
+# Dados da empresa. Use dados-empresa.exemplo.md como modelo.
 dados-empresa.md
 
-# Biblioteca local de fontes oficiais (~11 MB).
-# Reconstruída com ATUALIZAR-FONTES.bat. Manter no git carregaria texto legal
-# desatualizado no histórico para sempre.
-legal-br-skill/legal-br/fontes/
-
-# Artefatos gerados pelo atualizador
-CHECKSUMS-SHA256.txt
-ULTIMA-ATUALIZACAO.txt
-FALHAS-DOWNLOAD.txt
-*.download
-
-# Saídas de trabalho — contêm material de cliente
+# Saidas de trabalho: contem material de cliente
 *-REVISADO-*.md
 CONSULTA-ADVOGADO-*.md
 revisoes/
-entrada/
 
-# Documentos recebidos para revisão
+# Documentos recebidos para revisao.
+# Coloque tudo que chegar de fora em entrada/, que nao e versionada.
+entrada/
 *.docx
 *.doc
 *.pdf
-!legal-br-skill/legal-br/templates/*.md
+# Excecao: os guias da ANPD fazem parte da biblioteca e sao versionados.
+!legal-br-skill/legal-br/fontes/anpd/*.pdf
+
+# Relatorio pontual do verificador: regenerado a cada execucao.
+# O CONTEUDO-SHA256.txt, esse sim, e versionado: e a impressao digital de referencia.
+STATUS-FONTES.md
+
+# Artefatos temporarios do atualizador
+*.download
+FALHAS-DOWNLOAD.txt
 
 # Sistema
 Thumbs.db

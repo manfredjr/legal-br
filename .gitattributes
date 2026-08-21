@@ -1,0 +1,14 @@
+# A biblioteca de fontes e evidencia juridica: os bytes precisam sobreviver ao
+# clone intactos, senao o CHECKSUMS-SHA256.txt nao confere na maquina de quem
+# baixou. Sem esta regra o git converteria LF para CRLF no Windows e mudaria o
+# hash de todos os arquivos de lei.
+legal-br-skill/legal-br/fontes/** -text
+
+# Scripts do Windows: CRLF e o esperado.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+
+# Documentacao: normaliza para LF no repositorio.
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf

@@ -84,7 +84,8 @@ Um trailer que escapa é caro de tirar: obriga a reescrever o histórico com `fi
 
 1. **Nada de projeto externo, cliente ou caso concreto.** O repositório documenta apenas como o agente funciona, como processa e quais são suas skills.
 2. **`dados-empresa.md` nunca é versionado** - está no `.gitignore`. Só o `dados-empresa.exemplo.md` vai para o repositório.
-3. **`fontes/` não é versionada.** São ~11 MB de HTML/PDF baixados de portais oficiais, reconstruíveis com `ATUALIZAR-FONTES.bat`. Manter no git significaria carregar texto legal desatualizado no histórico para sempre.
+3. **`fontes/` é versionada**, junto com `CHECKSUMS-SHA256.txt` e `ULTIMA-ATUALIZACAO.txt`. São 10,4 MB e o maior arquivo tem 1,8 MB, bem abaixo dos limites do GitHub. O snapshot é a evidência em que as conclusões se apoiam, e o checksum só prova integridade se os arquivos medidos estiverem versionados junto. Reconstruir por script depende de os portais estarem no ar e das URLs não mudarem, e as duas coisas já falharam aqui.
+   Convenção: só commite a biblioteca quando o `CHECKSUMS` mudar de fato. PDF é binário e não faz delta no git.
 4. Documentos revisados (`*-REVISADO-*.md`) e consultas (`CONSULTA-ADVOGADO-*.md`) contêm material de cliente - também ficam fora.
 
 ## Como o agente opera
@@ -196,6 +197,30 @@ Detalhe que atrapalhou o diagnostico: o `filter-branch -- --all` reescreve tambe
 Resultado: 4 commits, todos com autor `manfredjr`, zero trailers de co-autoria, `/contributors` e `/stats/contributors` retornando uma pessoa so.
 
 A regra que saiu disso esta em "Autoria dos commits".
+
+### 2026-08-21 - Biblioteca versionada e verificador de atualidade
+
+Duas mudancas ligadas.
+
+**A biblioteca passou a ser versionada.** A decisao anterior de deixar `fontes/` fora do git nao se sustentou. Sao 10,4 MB com maior arquivo de 1,8 MB, longe dos limites do GitHub. Reconstruir por script depende de os portais estarem no ar, e nesta mesma sessao 7 arquivos vieram como pagina de erro sem ninguem notar. E o `CHECKSUMS-SHA256.txt` so prova integridade se os arquivos que ele mede estiverem versionados junto. O snapshot e a evidencia.
+
+O `.gitignore` tinha um `*.pdf` sem escopo que bloquearia os 7 guias da ANPD mesmo depois de liberar `fontes/`. Virou regra com excecao explicita para `fontes/anpd/*.pdf`, e documento recebido de fora vai para `entrada/`, que fica fora do versionamento.
+
+**Verificador de atualidade.** `VERIFICAR-FONTES.ps1` baixa cada uma das 29 fontes para area temporaria, compara com o registrado e escreve `STATUS-FONTES.md`. Somente leitura: nao encosta em `fontes/`.
+
+A primeira versao comparava bytes e acusou 18 normas alteradas em poucas horas, incluindo a Constituicao. As paginas do Planalto passam por um balanceador F5 que injeta `<script id="f5_cspm">` com token aleatorio a cada requisicao. Mesmo tamanho de arquivo, uma linha diferente. Os unicos 7 que passaram eram os PDFs da ANPD, que nao sofrem a injecao.
+
+A correcao foi comparar o texto, nao os bytes: `Get-HashConteudo` remove scripts, estilos, comentarios e marcacao antes de calcular o hash. Resultado depois da correcao: 29/29 em dia.
+
+Testado nos dois sentidos. Alteracao simulada no texto da LGPD muda o hash, e injecao de 65 bytes de script do F5 nao muda. Um verificador que so sabe dizer "em dia" e tao inutil quanto um que grita a toa.
+
+Passou a existir `lib-fontes.ps1`, com as funcoes comuns aos dois scripts. Duplicar `Test-Download` nos dois era o mesmo risco de drift que motivou a fusao dos pacotes.
+
+Dois arquivos de hash, com papeis distintos: `CHECKSUMS-SHA256.txt` guarda o hash de bytes e responde "o arquivo em disco esta integro"; `CONTEUDO-SHA256.txt` guarda o hash do texto e responde "a norma continua a mesma na origem". Os dois sao versionados. O `STATUS-FONTES.md` nao, porque e relatorio pontual.
+
+Armadilha registrada: o bloco novo no atualizador tinha um `catch {}` vazio que engoliu um erro de regex e gerou zero hashes em silencio, o mesmo modo de falha do bug original dos PDFs. Agora reporta o que falhou e avisa quando nao gera nada.
+
+O `SKILL.md` ganhou a secao "Antes de citar a biblioteca local": nenhum arquivo de `fontes/` vale como texto vigente sem consulta ao `STATUS-FONTES.md`, e relatorio com mais de 30 dias conta como vencido.
 
 ## Pendências conhecidas
 

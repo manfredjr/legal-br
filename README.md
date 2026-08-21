@@ -24,9 +24,19 @@ Aqui o conhecimento interno do modelo não conta como fonte. Toda afirmação ju
 
 A consulta é feita no arquivo oficial, antes de qualquer afirmação. Não há camada de resumo no meio.
 
-A biblioteca não vem no repositório. Você a reconstrói com um comando, e o atualizador valida cada download: PDF tem que começar com `%PDF-` e HTML não pode ser página de erro do portal. Essa checagem existe porque portais de governo devolvem página de manutenção com HTTP 200, e um script que confia no código de status salva o erro achando que deu certo.
+A biblioteca vem versionada no repositório, com a data da coleta em `ULTIMA-ATUALIZACAO.txt` e o hash de cada arquivo em `CHECKSUMS-SHA256.txt`. Quem clona recebe o snapshot exato em que as conclusões se apoiaram, sem depender de os portais estarem no ar.
 
-### 2. Regra de evidência
+Para atualizar, o `ATUALIZAR-FONTES.bat` valida cada download antes de gravar: PDF tem que começar com `%PDF-` e HTML não pode ser página de erro do portal. Essa checagem existe porque portais de governo devolvem página de manutenção com HTTP 200, e um script que confia no código de status salva o erro achando que deu certo.
+
+### 2. Verificação de atualidade
+
+Snapshot velho é o modo de falha mais perigoso de um agente jurídico: ele responde com confiança sobre um texto que mudou. O `VERIFICAR-FONTES.bat` compara cada uma das 29 fontes com o original e escreve um relatório em `STATUS-FONTES.md`, sem alterar a biblioteca.
+
+A comparação é sobre o **texto**, não sobre os bytes. As páginas do Planalto passam por um balanceador que injeta um `<script>` com token aleatório a cada requisição: comparando bytes, até a Constituição apareceria alterada várias vezes ao dia. O hash é calculado depois de remover scripts, estilos, comentários e marcação, então só muda quando o texto legal muda.
+
+O agente é obrigado a consultar esse relatório antes de tratar qualquer arquivo local como vigente. Norma marcada como desatualizada não serve de fundamento: vai para a fonte oficial ou vira pendência.
+
+### 3. Regra de evidência
 
 Cada ponto da análise recebe uma classificação:
 
@@ -40,7 +50,7 @@ Cada ponto da análise recebe uma classificação:
 
 Se a norma não foi localizada na biblioteca nem em fonte oficial, o ponto não pode ser classificado como FATO LEGAL. Na dúvida entre afirmar e escalonar, escalona.
 
-### 3. Revisão de documentos
+### 4. Revisão de documentos
 
 Entra um contrato, uma política, um termo ou um regulamento. Sai um `.md`:
 
@@ -50,7 +60,7 @@ Entra um contrato, uma política, um termo ou um regulamento. Sai um `.md`:
 
 A revisão vai cláusula a cláusula, com o texto original preservado, o apontamento, o fundamento com a fonte aberta e a redação substitutiva proposta. Cláusula sem problema também é registrada, porque quem lê precisa saber que ela foi analisada. Cláusulas ausentes entram em seção própria.
 
-### 4. Quando o documento é sinalizado
+### 5. Quando o documento é sinalizado
 
 Boa parte dos documentos jurídicos de um sistema é padrão: repete-se entre projetos e já foi validada antes. Esses passam limpos. O que precisa de parecer é o que sai do padrão.
 
@@ -58,7 +68,7 @@ Documento validado integralmente em fonte oficial não recebe aviso nenhum. Só 
 
 Ressalva em todo documento vira ruído. O leitor para de ler o rodapé e perde junto a sinalização que importava.
 
-### 5. Escalonamento
+### 6. Escalonamento
 
 O agente resolve o grosso do trabalho. O advogado recebe o resíduo, num arquivo pronto para responder:
 
@@ -82,10 +92,10 @@ git clone https://github.com/manfredjr/legal-br.git
 
 Depois execute `legal-br-skill\INSTALAR-LEGAL-BR.bat`. Ele copia a skill para `%USERPROFILE%\.claude\skills\legal-br`.
 
-Baixe a biblioteca de fontes:
+A biblioteca de fontes já vem no clone. Para conferir se continua atual:
 
 ```text
-%USERPROFILE%\.claude\skills\legal-br\ATUALIZAR-FONTES.bat
+%USERPROFILE%\.claude\skills\legal-br\VERIFICAR-FONTES.bat
 ```
 
 Reinicie o Claude Code e teste:
@@ -110,7 +120,8 @@ legal-br-skill/legal-br/
   dados-empresa.exemplo.md
   FONTES-OFICIAIS.md          catalogo com o link oficial de cada arquivo
   ATUALIZAR-FONTES.bat/.ps1   baixa e valida as 29 fontes
-  fontes/                     biblioteca local (gerada)
+  VERIFICAR-FONTES.bat/.ps1   compara cada fonte com o original
+  fontes/                     29 fontes oficiais, versionadas
 ```
 
 ## Limites

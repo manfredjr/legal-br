@@ -87,9 +87,24 @@ Ordem de consulta:
 
 O catálogo completo, com o link oficial de cada arquivo, está em [FONTES-OFICIAIS.md](FONTES-OFICIAIS.md) e em `fontes-oficiais.json`.
 
-A biblioteca local é um snapshot. A data da última coleta está em `ULTIMA-ATUALIZACAO.txt` - verifique-a antes de tratar a cópia local como atual. Quando a vigência for material para a resposta, valide na fonte oficial online. Em caso de divergência, prevalece a fonte oficial vigente.
+A biblioteca local é um snapshot. A data da última coleta está em `ULTIMA-ATUALIZACAO.txt`. Quando a vigência for material para a resposta, valide na fonte oficial online. Em caso de divergência, prevalece a fonte oficial vigente.
 
-Para atualizar a cópia local, execute `ATUALIZAR-FONTES.bat`.
+### Antes de citar a biblioteca local
+
+Nenhum arquivo de `fontes/` vale como texto vigente sem passar por esta checagem. Consulte `STATUS-FONTES.md`, que registra a comparação de cada norma com a fonte oficial:
+
+| Situação no relatório | O que fazer |
+|---|---|
+| EM DIA | Pode citar a cópia local como texto vigente. |
+| MUDOU | A cópia local está desatualizada. Vá à fonte oficial. Não confirmou? O ponto é PENDÊNCIA DE VALIDAÇÃO. |
+| MUDOU (dinâmica) | Página de listagem da ANPD. Não indica alteração normativa, mas pode ter guia ou resolução nova fora do catálogo. |
+| INACESSÍVEL, ou ausente do relatório | Não há confirmação. Trate como não verificada. |
+
+Se `STATUS-FONTES.md` não existir, ou se a verificação nele registrada tiver mais de 30 dias, considere a checagem vencida: confirme online antes de concluir, ou classifique como PENDÊNCIA DE VALIDAÇÃO.
+
+Diga na análise qual foi a base. "Verificado em `fontes/leis/03-lgpd...`, confirmado em dia no relatório de 21/08/2026" é rastreável. "Conforme a LGPD" não é.
+
+Para gerar o relatório, execute `VERIFICAR-FONTES.bat`. Ele compara e reporta, sem alterar a biblioteca. Para atualizar a cópia local, execute `ATUALIZAR-FONTES.bat`.
 
 ## Escopo
 

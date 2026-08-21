@@ -41,34 +41,9 @@ $headers = @{
     'Accept-Language' = 'pt-BR,pt;q=0.9,en;q=0.5'
 }
 
-# Valida o que foi baixado. Retorna $null se estiver OK, ou a descricao do problema.
-# O gov.br devolve paginas de erro com HTTP 200, entao ausencia de excecao nao basta.
-function Test-Download {
-    param([string]$Caminho)
+# Funcoes comuns: validacao de download e hash de conteudo.
+. (Join-Path $Root 'lib-fontes.ps1')
 
-    if (-not (Test-Path $Caminho)) { return 'arquivo nao foi criado' }
-
-    $tamanho = (Get-Item $Caminho).Length
-    if ($tamanho -lt 4096) { return "conteudo muito pequeno ($tamanho bytes)" }
-
-    $bytes = New-Object byte[] 5
-    $fs = [System.IO.File]::OpenRead($Caminho)
-    try { $lidos = $fs.Read($bytes, 0, 5) } finally { $fs.Close() }
-    $magic = [System.Text.Encoding]::ASCII.GetString($bytes, 0, $lidos)
-
-    if ($Caminho -match '\.pdf$') {
-        if ($magic -ne '%PDF-') {
-            return "esperado PDF, veio '$magic' (provavel pagina de erro salva com extensao .pdf)"
-        }
-        return $null
-    }
-
-    $texto = Get-Content -Path $Caminho -Raw -ErrorAction SilentlyContinue
-    foreach ($marcador in @('Estamos em manuten', 'class="error_container"', 'class="error_message"')) {
-        if ($texto -like "*$marcador*") { return "pagina de erro do portal (marcador: $marcador)" }
-    }
-    return $null
-}
 
 $sucesso = 0
 $falhas = @()
@@ -118,6 +93,34 @@ $hashes = foreach ($arq in $arquivos) {
     } catch {}
 }
 $hashes | Set-Content -Path $hashFile -Encoding UTF8
+
+# Hash do conteudo: ignora o <script id="f5_cspm"> que o balanceador do Planalto
+# injeta a cada requisicao. E este arquivo que o VERIFICAR-FONTES.ps1 compara.
+$conteudoFile = Join-Path $Root "CONTEUDO-SHA256.txt"
+$errosHash = @()
+$conteudos = foreach ($arq in $arquivos) {
+    if ($arq.Name -eq '.gitkeep') { continue }
+    try {
+        $h = Get-HashConteudo -Caminho $arq.FullName -Nome $arq.Name
+        $rel = $arq.FullName.Substring($Root.Length).TrimStart([char]92, [char]47).Replace([char]92, [char]47)
+        "$h  $rel"
+    }
+    catch {
+        $errosHash += "$($arq.Name): $($_.Exception.Message)"
+    }
+}
+if ($errosHash.Count -gt 0) {
+    Write-Host "AVISO: $($errosHash.Count) arquivo(s) sem hash de conteudo:" -ForegroundColor Red
+    $errosHash | ForEach-Object { Write-Host "   $_" -ForegroundColor Red }
+}
+if (-not $conteudos -or $conteudos.Count -eq 0) {
+    Write-Host "ERRO: nenhum hash de conteudo foi gerado. CONTEUDO-SHA256.txt nao sera escrito." -ForegroundColor Red
+}
+else {
+    $conteudos | Set-Content -Path $conteudoFile -Encoding UTF8
+    Write-Host "CONTEUDO-SHA256.txt: $($conteudos.Count) arquivos" -ForegroundColor Green
+}
+
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss K"
 @(
