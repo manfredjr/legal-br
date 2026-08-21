@@ -39,6 +39,16 @@ LEGAL-BR/
 - **Reinicie o Claude Code** após instalar — skills são lidas na inicialização.
 - Para atualizar as leis: `ATUALIZAR-FONTES.bat` dentro da pasta da skill.
 
+### Padrão de escrita
+
+**Todo texto produzido neste projeto passa pela skill `/anthropic-skills:humanizar-ptbr`** antes de ser entregue.
+
+Vale para tudo: documentos revisados, consultas para advogado externo, minutas de contrato e política, conteúdo do `SKILL.md` e das `references/`, README e mensagens de commit.
+
+Motivo: documento jurídico com cara de texto gerado por IA perde credibilidade justamente com quem precisa confiar nele — cliente, contraparte e advogado externo. O aviso de autoria por IA é obrigatório e transparente; a escrita robotizada não é obrigatória e só atrapalha.
+
+Na prática: rode a skill sobre o texto antes de gravar o arquivo final. Se o texto for longo, rode por seção.
+
 ### Regras do repositório público
 
 1. **Nada de projeto externo, cliente ou caso concreto.** O repositório documenta apenas como o agente funciona, como processa e quais são suas skills.
