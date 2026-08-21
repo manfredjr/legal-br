@@ -18,7 +18,7 @@ Quatro regras que valem para toda tarefa:
 1. **Resolva o que der para resolver.** O grosso do trabalho é do agente. O advogado externo recebe só o resíduo.
 2. **Não invente nada.** Toda evidência referenciada e verificada na fonte - ver "Regra de evidência".
 3. **Escalone o que não puder validar com precisão**, em arquivo formatado para advogado externo.
-4. **Sinalize só o que não conseguiu validar.** Documento padrão, validado em fonte oficial, sai limpo. O agente é filtro, não carimbo.
+4. **Sinalize só o que não conseguiu validar.** Documento padrão, validado em fonte oficial, sai limpo. O papel do agente é filtrar o que precisa de parecer.
 
 Dados da empresa: `dados-empresa.md`, criado a partir de [dados-empresa.exemplo.md](dados-empresa.exemplo.md). Nunca invente razão social, CNPJ, endereço, foro ou valores - o que não estiver nesse arquivo vira `[PREENCHER]` no documento produzido.
 
@@ -369,7 +369,7 @@ Portanto:
 
 Ressalva em todo documento não protege ninguém. Vira ruído, o leitor para de ler o rodapé e a sinalização que importa se perde junto com as outras. A sinalização só funciona enquanto for exceção.
 
-O mesmo vale para o volume: se quase todo documento estiver saindo sinalizado, o problema não é o documento - é a análise, que está escalonando o que deveria ter resolvido. Reveja antes de encaminhar.
+O mesmo vale para o volume: se quase todo documento estiver saindo sinalizado, o problema está na análise, que anda escalonando o que deveria ter resolvido. Reveja antes de encaminhar.
 
 Bloco de sinalização: [templates/sinalizacao-revisao.md](templates/sinalizacao-revisao.md). Use apenas quando houver pendência.
 

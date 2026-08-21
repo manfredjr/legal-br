@@ -1,14 +1,14 @@
 # legal-br
 
-Skill para [Claude Code](https://claude.com/claude-code) que atua como **agente de IA jurídico** em direito digital, proteção de dados e direito do consumidor, apoiando o desenvolvimento de software no Brasil.
+Skill para [Claude Code](https://claude.com/claude-code) que atua como agente de IA jurídico em direito digital, proteção de dados e direito do consumidor, apoiando o desenvolvimento de software no Brasil.
 
-> Ferramenta de apoio ao processo jurídico. Não emite parecer e não substitui advogado inscrito na OAB - o que sai do padrão é encaminhado para parecer humano.
+> Ferramenta de apoio ao processo jurídico. Não emite parecer e não substitui advogado inscrito na OAB. O que sai do padrão é encaminhado para parecer humano.
 
 ## O problema
 
-Modelo de linguagem responde pergunta jurídica de memória. Cita artigo que não existe, atribui obrigação a lei errada, dá número de artigo plausível e falso. Em direito, isso não é um erro cosmético - é a resposta inteira sem valor.
+Modelo de linguagem responde pergunta jurídica de memória. Cita artigo que não existe e atribui obrigação à lei errada, com número plausível o bastante para passar despercebido. Em direito isso invalida a resposta inteira.
 
-Esta skill parte do princípio oposto: **conhecimento interno do modelo não é fonte**. Toda afirmação jurídica precisa de norma, artigo, onde foi verificado e data. O que não passa nesse teste não vira conclusão: vira pergunta para um advogado.
+Aqui o conhecimento interno do modelo não conta como fonte. Toda afirmação jurídica precisa de norma, artigo, onde foi verificado e data. O que não passa nesse teste vira pergunta para um advogado, não conclusão.
 
 ## Como funciona
 
@@ -22,9 +22,9 @@ Esta skill parte do princípio oposto: **conhecimento interno do modelo não é 
 | `fontes/eca-digital/` | Lei 15.211/2025 (ECA Digital), Decreto 12.880/2026, orientações da ANPD sobre aferição de idade |
 | `fontes/anpd/` | Guias da ANPD (legítimo interesse, cookies, agentes de tratamento e encarregado, segurança e ROPA para pequeno porte) e Resoluções CD/ANPD nº 2/2022, 15/2024, 18/2024, 19/2024 |
 
-O agente lê o texto legal antes de afirmar. Não é RAG sobre resumo - é o arquivo oficial.
+A consulta é feita no arquivo oficial, antes de qualquer afirmação. Não há camada de resumo no meio.
 
-A biblioteca não vem no repositório: você a reconstrói com um comando. O atualizador **valida cada download** - PDF tem que começar com `%PDF-`, HTML não pode ser página de erro do portal - porque portais de governo devolvem página de manutenção com HTTP 200, e um script ingênuo salva o erro achando que deu certo.
+A biblioteca não vem no repositório. Você a reconstrói com um comando, e o atualizador valida cada download: PDF tem que começar com `%PDF-` e HTML não pode ser página de erro do portal. Essa checagem existe porque portais de governo devolvem página de manutenção com HTTP 200, e um script que confia no código de status salva o erro achando que deu certo.
 
 ### 2. Regra de evidência
 
@@ -32,13 +32,13 @@ Cada ponto da análise recebe uma classificação:
 
 | Classificação | Significado |
 |---|---|
-| **FATO LEGAL** | Obrigação confirmada em fonte oficial - com norma, artigo, arquivo e data |
-| **INTERPRETAÇÃO** | Aplicação da regra ao caso concreto |
-| **RECOMENDAÇÃO** | Medida preventiva ou boa prática |
-| **RISCO** | Consequência jurídica ou operacional possível |
-| **PENDÊNCIA DE VALIDAÇÃO** | Não foi possível confirmar - vai para advogado externo |
+| FATO LEGAL | Obrigação confirmada em fonte oficial, com norma, artigo, arquivo e data |
+| INTERPRETAÇÃO | Aplicação da regra ao caso concreto |
+| RECOMENDAÇÃO | Medida preventiva ou boa prática |
+| RISCO | Consequência jurídica ou operacional possível |
+| PENDÊNCIA DE VALIDAÇÃO | Não foi possível confirmar, e o ponto vai para advogado externo |
 
-Se a norma não foi localizada na biblioteca nem em fonte oficial, o ponto **não pode** ser FATO LEGAL. Na dúvida entre afirmar e escalonar, escalona.
+Se a norma não foi localizada na biblioteca nem em fonte oficial, o ponto não pode ser classificado como FATO LEGAL. Na dúvida entre afirmar e escalonar, escalona.
 
 ### 3. Revisão de documentos
 
@@ -48,29 +48,29 @@ Entra um contrato, uma política, um termo ou um regulamento. Sai um `.md`:
 <original>-REVISADO-AAAA-MM-DD.md
 ```
 
-Cláusula a cláusula, com o texto original preservado, o apontamento, o fundamento com a fonte aberta e a **redação substitutiva proposta**. Cláusula sem problema também é registrada - quem lê precisa saber que ela foi analisada. Cláusulas ausentes entram numa seção própria.
+A revisão vai cláusula a cláusula, com o texto original preservado, o apontamento, o fundamento com a fonte aberta e a redação substitutiva proposta. Cláusula sem problema também é registrada, porque quem lê precisa saber que ela foi analisada. Cláusulas ausentes entram em seção própria.
 
-### 4. Filtro, não carimbo
+### 4. Quando o documento é sinalizado
 
-Boa parte dos documentos jurídicos de um sistema é padrão: repete-se entre projetos e já foi validada antes. Esses passam limpos, sem ressalva. O que sai do padrão é que precisa de parecer.
+Boa parte dos documentos jurídicos de um sistema é padrão: repete-se entre projetos e já foi validada antes. Esses passam limpos. O que precisa de parecer é o que sai do padrão.
 
-Documento validado integralmente em fonte oficial não recebe aviso nenhum. Só o documento com ponto pendente sai sinalizado - e a sinalização nomeia o ponto, delimita o que já está verificado e aponta para a consulta gerada.
+Documento validado integralmente em fonte oficial não recebe aviso nenhum. Só o documento com ponto pendente sai sinalizado, e a sinalização nomeia o ponto, delimita o que já está verificado e aponta para a consulta gerada.
 
-Ressalva em todo documento vira ruído: o leitor para de ler o rodapé e perde junto a sinalização que importava.
+Ressalva em todo documento vira ruído. O leitor para de ler o rodapé e perde junto a sinalização que importava.
 
 ### 5. Escalonamento
 
-O agente faz o grosso. O advogado recebe o resíduo, num arquivo pronto para responder:
+O agente resolve o grosso do trabalho. O advogado recebe o resíduo, num arquivo pronto para responder:
 
 ```text
 CONSULTA-ADVOGADO-<assunto>-AAAA-MM-DD.md
 ```
 
-Perguntas fechadas, contexto mínimo, o que já foi apurado e com base em qual fonte, as interpretações possíveis com o risco de cada uma, o impacto prático da resposta e a urgência. Não é "dá uma olhada nesse contrato".
+Cada questão traz pergunta objetiva, contexto mínimo, o que já foi apurado e com base em qual fonte, as interpretações possíveis com o risco de cada uma, o impacto prático da resposta e a urgência. O formato existe para que o advogado responda sem refazer a análise.
 
 ## Escopo
 
-LGPD e privacidade, politicas de privacidade, cookies, termos de uso, contratos de desenvolvimento e licenciamento de software, SaaS, CDC e comercio eletronico, pagamentos, cancelamentos e reembolsos, responsabilidade civil, propriedade intelectual e Lei de Software, marcas e INPI, uso de imagem, criancas e adolescentes, eventos esportivos e regulamentos, documentacao de conformidade.
+LGPD e privacidade, políticas de privacidade, cookies, termos de uso, contratos de desenvolvimento e licenciamento de software, SaaS, CDC e comércio eletrônico, pagamentos, cancelamentos e reembolsos, responsabilidade civil, propriedade intelectual e Lei de Software, marcas e INPI, uso de imagem, crianças e adolescentes, eventos esportivos e regulamentos, documentação de conformidade.
 
 ## Instalação
 
@@ -98,7 +98,7 @@ Para instalar só num projeto, copie a pasta `legal-br` para `SEU_PROJETO\.claud
 
 ### Configuração
 
-Copie `dados-empresa.exemplo.md` para `dados-empresa.md` e preencha. A skill lê esse arquivo antes de redigir contratos e políticas - o que não estiver lá vira `[PREENCHER]` no documento, nunca é inventado. O `dados-empresa.md` não é versionado.
+Copie `dados-empresa.exemplo.md` para `dados-empresa.md` e preencha. A skill lê esse arquivo antes de redigir contratos e políticas. O que não estiver lá vira `[PREENCHER]` no documento, nunca é inventado. O `dados-empresa.md` fica fora do controle de versão.
 
 ## Estrutura
 
@@ -115,12 +115,12 @@ legal-br-skill/legal-br/
 
 ## Limites
 
-Não substitui advogado. Não emite parecer. Não avalia caso concreto em litígio. Não cobre direito trabalhista, tributário, societário nem contratação pública - esses temas são escalonados por definição.
+Não substitui advogado, não emite parecer e não avalia caso concreto em litígio. Direito trabalhista, tributário, societário e contratação pública ficam fora do escopo e são escalonados por definição.
 
-A biblioteca local é um snapshot com data registrada. Quando a vigência de uma norma for material para a resposta, o agente valida na fonte oficial online, e a fonte vigente prevalece sobre a cópia local.
+A biblioteca local é um snapshot com data registrada. Quando a vigência de uma norma for material para a resposta, o agente valida na fonte oficial online, e a versão vigente prevalece sobre a cópia local.
 
 ## Licença
 
 [MIT](LICENSE).
 
-Os textos legais baixados pelo `ATUALIZAR-FONTES.bat` são atos oficiais e não são objeto de proteção autoral (Lei 9.610/1998, art. 8º, IV). Eles não são redistribuídos neste repositório - o script os obtém direto da fonte oficial.
+Os textos legais baixados pelo `ATUALIZAR-FONTES.bat` são atos oficiais e não são objeto de proteção autoral (Lei 9.610/1998, art. 8º, IV). Eles não são redistribuídos neste repositório, porque o script os obtém direto da fonte oficial.

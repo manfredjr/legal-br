@@ -2,11 +2,11 @@
 
 Skill para Claude Code que atua como agente jurídico de IA em direito digital, proteção de dados e direito do consumidor, apoiando o desenvolvimento de software.
 
-Não é uma coleção de prompts: é uma skill com biblioteca local de fontes primárias, regra de evidência rastreável e escalonamento formal para advogado externo.
+A skill traz biblioteca local de fontes primárias, regra de evidência rastreável e escalonamento formal para advogado externo.
 
 ## Objetivo
 
-Fazer o **grosso** do trabalho jurídico de um produto digital - revisão de contratos, políticas, termos, regulamentos e licenciamento - sem inventar nada, com toda evidência referenciada e verificada na fonte. O que o agente não conseguir validar com precisão vira um arquivo formatado para um advogado externo dar parecer.
+Fazer o grosso do trabalho jurídico de um produto digital - revisão de contratos, políticas, termos, regulamentos e licenciamento - sem inventar nada, com toda evidência referenciada e verificada na fonte. O que o agente não conseguir validar com precisão vira um arquivo formatado para um advogado externo dar parecer.
 
 ## Estrutura
 
@@ -66,26 +66,26 @@ Os commits são da MT - Manfred Tecnologia. A mensagem descreve o que mudou e po
 
 Definido em `SKILL.md`. Quatro regras:
 
-1. **Resolve o que dá para resolver** - o advogado externo recebe só o resíduo.
-2. **Não inventa nada** - toda afirmação com norma, artigo, onde foi verificado e data.
-3. **Escalona o que não puder validar** - arquivo `CONSULTA-ADVOGADO-*.md` com perguntas fechadas.
-4. **Sinaliza só o que não conseguiu validar** - documento padrão sai limpo.
+1. Resolve o que dá para resolver. O advogado externo recebe só o resíduo.
+2. Não inventa nada. Toda afirmação com norma, artigo, onde foi verificado e data.
+3. Escalona o que não puder validar, em arquivo `CONSULTA-ADVOGADO-*.md` com perguntas fechadas.
+4. Sinaliza só o que não conseguiu validar. Documento padrão sai limpo.
 
 ### O agente é um filtro
 
 Este é o ponto central do desenho, e é fácil errar para o lado seguro.
 
-Num sistema, a maioria dos documentos jurídicos é padrão: repete-se entre projetos, já foi validada antes, não tem nada de particular. Esses documentos **passam limpos**. Sem aviso de autoria por IA, sem carimbo de "revisar com advogado", sem ressalva genérica.
+Num sistema, a maioria dos documentos jurídicos é padrão: repete-se entre projetos, já foi validada antes, não tem nada de particular. Esses documentos passam limpos. Sem aviso de autoria por IA, sem carimbo de "revisar com advogado", sem ressalva genérica.
 
 Só o documento com PENDÊNCIA DE VALIDAÇÃO sai sinalizado - e a sinalização nomeia o ponto, delimita o que já está verificado e aponta para a consulta gerada.
 
 Motivo: ressalva em todo documento não protege ninguém. Vira ruído, o leitor para de ler o rodapé e a sinalização que importava se perde junto com as outras. Só funciona enquanto for exceção.
 
-Termômetro: se quase todo documento estiver saindo sinalizado, o problema não é o documento - é a análise, que está escalonando o que deveria ter resolvido.
+Termômetro: se quase todo documento estiver saindo sinalizado, o problema está na análise, que anda escalonando o que deveria ter resolvido.
 
 ### Regra de evidência
 
-Um ponto só é **FATO LEGAL** se tiver norma + artigo + arquivo local ou URL oficial + data de verificação. Sem isso, é **PENDÊNCIA DE VALIDAÇÃO** e vai para o advogado.
+Um ponto só é FATO LEGAL se tiver norma + artigo + arquivo local ou URL oficial + data de verificação. Sem isso, é PENDÊNCIA DE VALIDAÇÃO e vai para o advogado.
 
 Proibido citar artigo de memória, deduzir número de artigo pelo assunto, transformar prática de mercado em obrigação legal ou apresentar interpretação como texto de lei.
 
