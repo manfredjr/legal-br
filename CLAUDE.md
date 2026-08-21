@@ -51,9 +51,34 @@ Na prática: rode a skill sobre o texto antes de gravar o arquivo final. Se for 
 
 ### Autoria dos commits
 
-**O Claude não entra como co-autor.** Nada de `Co-Authored-By: Claude`, nada de menção a ferramenta de IA em mensagem de commit, corpo de PR, release ou qualquer lugar visível no GitHub.
+O Claude não entra como co-autor nem como contributor. Em nenhuma hipótese.
+
+Proibido em qualquer commit, branch ou PR deste repositório:
+
+- o trailer `Co-Authored-By: Claude <noreply@anthropic.com>`, em qualquer variação de nome ou e-mail;
+- qualquer outro trailer de co-autoria apontando para ferramenta de IA;
+- assinatura do tipo "Generated with Claude Code" no corpo do commit, na descrição do PR ou em release;
+- configurar `user.name` ou `user.email` do git com identidade que não seja a da MT.
 
 Os commits são da MT - Manfred Tecnologia. A mensagem descreve o que mudou e por quê, e para aí.
+
+Citar `Claude Code` como plataforma alvo da skill é outra coisa, e é permitido. A skill roda no Claude Code, então o README e o `SKILL.md` mencionam o produto. O que não pode é o Claude figurar como autor do trabalho.
+
+Antes de qualquer push, confira:
+
+```bash
+git log --format=%B | Select-String -Pattern "co-authored"
+```
+
+Sem saída significa limpo.
+
+Depois do push, confirme que a lista de contributors tem uma pessoa só:
+
+```bash
+gh api repos/manfredjr/legal-br/contributors --jq ".[].login"
+```
+
+Um trailer que escapa é caro de tirar: obriga a reescrever o histórico com `filter-branch`, forçar o push e esperar o GitHub recalcular o cache de `/stats/contributors`, que é assíncrono e demora. Sai muito mais barato não deixar entrar.
 
 ### Regras do repositório público
 
@@ -155,6 +180,22 @@ Corrigido:
 - `README.md` reescrito no mesmo sentido.
 
 Regra que ficou: documento validado integralmente em fonte oficial sai limpo. Só o que tem ponto pendente sai sinalizado, e a sinalização nomeia o ponto.
+
+### 2026-08-21 - Remocao do Claude como co-autor e contributor
+
+Os dois primeiros commits do repositorio subiram com o trailer `Co-Authored-By: Claude`. O GitHub indexou naquele momento e passou a listar duas pessoas em Contributors.
+
+O que foi preciso fazer:
+
+1. Reescrever as mensagens dos commits com `git filter-branch -f --msg-filter 'sed "/Co-Authored-By/d"' -- --all`.
+2. Empurrar o historico reescrito.
+3. Esperar o GitHub recalcular `/stats/contributors`, que alimenta a barra lateral e e assincrono. Enquanto processava, o endpoint respondia vazio e a pagina continuava mostrando duas pessoas.
+
+Detalhe que atrapalhou o diagnostico: o `filter-branch -- --all` reescreve tambem a ref local `refs/remotes/origin/main`. Depois disso o `git push --force-with-lease` responde "Everything up-to-date" mesmo quando o remoto ainda esta desatualizado. Para forcar de verdade, rode `git fetch origin` antes, para a lease comparar com o estado real.
+
+Resultado: 4 commits, todos com autor `manfredjr`, zero trailers de co-autoria, `/contributors` e `/stats/contributors` retornando uma pessoa so.
+
+A regra que saiu disso esta em "Autoria dos commits".
 
 ## Pendências conhecidas
 
