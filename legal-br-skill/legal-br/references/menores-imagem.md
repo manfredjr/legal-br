@@ -43,5 +43,5 @@ Considere:
 - ECA: https://www.planalto.gov.br/ccivil_03/leis/l8069.htm
 - LGPD: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm
 - ANPD: https://www.gov.br/anpd/
-- ANPD — entendimento sobre tratamento de dados de crianças e adolescentes:
+- ANPD - entendimento sobre tratamento de dados de crianças e adolescentes:
   https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-divulga-enunciado-sobre-o-tratamento-de-dados-pessoais-de-criancas-e-adolescentes

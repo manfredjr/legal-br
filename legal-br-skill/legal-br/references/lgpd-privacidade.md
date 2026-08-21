@@ -1,4 +1,4 @@
-# LGPD e privacidade — roteiro de análise
+# LGPD e privacidade - roteiro de análise
 
 Base principal: Lei 13.709/2018 e orientações da ANPD.
 
@@ -65,7 +65,7 @@ Trate com cuidado reforçado e sempre considere o melhor interesse. Consulte tam
 ## Fontes oficiais úteis
 
 - LGPD: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm
-- ANPD — materiais educativos e publicações:
+- ANPD - materiais educativos e publicações:
   https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes
-- ANPD — segurança da informação para agentes de pequeno porte:
+- ANPD - segurança da informação para agentes de pequeno porte:
   https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-orientativo-sobre-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte

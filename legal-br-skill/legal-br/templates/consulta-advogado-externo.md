@@ -1,4 +1,4 @@
-# Modelo — consulta a advogado externo
+# Modelo - consulta a advogado externo
 
 Nome do arquivo de saída: `CONSULTA-ADVOGADO-<assunto>-AAAA-MM-DD.md`
 
@@ -6,7 +6,7 @@ Objetivo: o advogado responde sem refazer a análise. Perguntas fechadas, contex
 
 ---
 
-# Consulta jurídica — [ASSUNTO]
+# Consulta jurídica - [ASSUNTO]
 
 | | |
 |---|---|
@@ -18,7 +18,7 @@ Objetivo: o advogado responde sem refazer a análise. Perguntas fechadas, contex
 
 ## Contexto
 
-[Cinco a dez linhas. O que é o produto/contrato, quem são as partes, o que se pretende fazer. Só o necessário para responder — não é briefing comercial.]
+[Cinco a dez linhas. O que é o produto/contrato, quem são as partes, o que se pretende fazer. Só o necessário para responder - não é briefing comercial.]
 
 ## O que já foi apurado
 
@@ -32,7 +32,7 @@ Levantamento feito pelo agente, com as fontes abertas e verificadas.
 
 Repita o bloco para cada questão.
 
-### Questão 1 — [TÍTULO CURTO]
+### Questão 1 - [TÍTULO CURTO]
 
 **Pergunta**
 
@@ -58,7 +58,7 @@ Repita o bloco para cada questão.
 
 [O que muda no produto, no contrato ou na operação conforme a resposta. Seja concreto: campo de cadastro, cláusula, fluxo, prazo de retenção.]
 
-**Urgência:** Alta | Média | Baixa — [justificativa em uma linha]
+**Urgência:** Alta | Média | Baixa - [justificativa em uma linha]
 
 **Trecho relacionado**
 
@@ -68,7 +68,7 @@ Repita o bloco para cada questão.
 
 ## Anexos
 
-- `[ARQUIVO]` — [descrição]
+- `[ARQUIVO]` - [descrição]
 
 ## Resposta do advogado
 
@@ -79,9 +79,13 @@ Espaço reservado. A ser preenchido pelo profissional.
 - **Parecer:**
 - **Fundamento:**
 - **Ressalvas:**
-- **Advogado:** [NOME] — OAB [UF] [NÚMERO]
+- **Advogado:** [NOME] - OAB [UF] [NÚMERO]
 - **Data:**
 
 ---
 
-[COLAR AQUI O BLOCO DE templates/aviso-agente-ia.md]
+## Como esta consulta foi montada
+
+O levantamento da seção "O que já foi apurado" foi feito por agente automatizado, a partir das fontes oficiais indicadas, com data de verificação em cada linha. As questões abaixo são justamente o que o agente **não** conseguiu concluir.
+
+Nada aqui é parecer. O parecer é o que se pede.

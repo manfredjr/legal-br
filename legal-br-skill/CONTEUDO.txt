@@ -1,33 +1,40 @@
 legal-br/
-├── SKILL.md
-├── README.md
-├── VERSION.txt
-├── references/
-│   ├── fontes-oficiais.md
-│   ├── lgpd-privacidade.md
-│   ├── consumidor-commerce.md
-│   ├── contratos-responsabilidade.md
-│   ├── software-propriedade-intelectual.md
-│   ├── menores-imagem.md
-│   ├── eventos-esportivos.md
-│   └── checklist-produto-digital.md
-├── templates/
-│   └── modelo-analise-juridica.md
-│
-├── FONTES-OFICIAIS.md          catalogo das fontes, com link oficial de cada arquivo
-├── fontes-oficiais.json        mesmo catalogo em formato legivel por script
-├── ATUALIZAR-FONTES.bat        atalho para rodar o atualizador
-├── ATUALIZAR-FONTES.ps1        baixa e valida as 29 fontes oficiais
-├── CHECKSUMS-SHA256.txt        gerado pelo atualizador
-├── ULTIMA-ATUALIZACAO.txt      data da ultima coleta e contagem de falhas
-└── fontes/                     biblioteca local (~11 MB)
-    ├── leis/                   12 arquivos: Constituicao, Codigo Civil, CDC, LGPD,
-    │                           Marco Civil, Lei de Software, Direitos Autorais, ECA,
-    │                           Lei Geral do Esporte, comercio eletronico,
-    │                           assinaturas eletronicas, ICP-Brasil
-    ├── eca-digital/            4 arquivos: Lei 15.211/2025, Decreto 12.880/2026,
-    │                           pagina da ANPD e orientacoes sobre afericao de idade
-    └── anpd/                   13 arquivos: guias da ANPD (legitimo interesse, cookies,
-                                agentes e encarregado, seguranca e ROPA para pequeno
-                                porte) e Resolucoes CD/ANPD 2/2022, 15/2024, 18/2024
-                                e 19/2024
+  SKILL.md
+  README.md
+  VERSION.txt
+
+  references/
+    fontes-oficiais.md
+    lgpd-privacidade.md
+    consumidor-commerce.md
+    contratos-responsabilidade.md
+    software-propriedade-intelectual.md
+    menores-imagem.md
+    eventos-esportivos.md
+    checklist-produto-digital.md
+
+  templates/
+    modelo-analise-juridica.md
+    documento-revisado.md
+    consulta-advogado-externo.md
+    sinalizacao-revisao.md
+
+  dados-empresa.exemplo.md    modelo dos dados da empresa (copie para dados-empresa.md)
+  FONTES-OFICIAIS.md          catalogo das fontes, com link oficial de cada arquivo
+  fontes-oficiais.json        mesmo catalogo em formato legivel por script
+  ATUALIZAR-FONTES.bat        atalho para rodar o atualizador
+  ATUALIZAR-FONTES.ps1        baixa e valida as 29 fontes oficiais
+  CHECKSUMS-SHA256.txt        gerado pelo atualizador
+  ULTIMA-ATUALIZACAO.txt      data da ultima coleta e contagem de falhas
+
+  fontes/                     biblioteca local (cerca de 11 MB, gerada)
+    leis/                     12 arquivos: Constituicao, Codigo Civil, CDC, LGPD,
+                              Marco Civil, Lei de Software, Direitos Autorais, ECA,
+                              Lei Geral do Esporte, comercio eletronico,
+                              assinaturas eletronicas, ICP-Brasil
+    eca-digital/              4 arquivos: Lei 15.211/2025, Decreto 12.880/2026,
+                              pagina da ANPD e orientacoes sobre afericao de idade
+    anpd/                     13 arquivos: guias da ANPD (legitimo interesse, cookies,
+                              agentes e encarregado, seguranca e ROPA para pequeno
+                              porte) e Resolucoes CD/ANPD 2/2022, 15/2024, 18/2024
+                              e 19/2024

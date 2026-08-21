@@ -1,6 +1,6 @@
-# INSTALAÇÃO — Legal BR no Claude Code
+# INSTALAÇÃO - Legal BR no Claude Code
 
-## Opção 1 — Instalador (recomendada)
+## Opção 1 - Instalador (recomendada)
 
 1. Descompacte o ZIP.
 2. Execute `INSTALAR-LEGAL-BR.bat`.
@@ -11,9 +11,9 @@ Ele copia a skill e a biblioteca local de fontes (~11 MB) para:
 %USERPROFILE%\.claude\skills\legal-br
 ```
 
-Rodar de novo atualiza a instalação existente — ele pede confirmação antes de substituir.
+Rodar de novo atualiza a instalação existente - ele pede confirmação antes de substituir.
 
-## Opção 2 — Cópia manual (skill pessoal)
+## Opção 2 - Cópia manual (skill pessoal)
 
 Copie a pasta `legal-br` inteira para:
 
@@ -30,7 +30,7 @@ C:\Users\SEU_USUARIO\.claude\skills\legal-br\fontes\leis\03-lgpd-lei-13709-2018-
 
 Copie a pasta **inteira**. Sem `fontes/`, a skill perde a biblioteca local e passa a depender só de consulta online.
 
-## Opção 3 — Apenas em um projeto
+## Opção 3 - Apenas em um projeto
 
 Copie a pasta `legal-br` para:
 

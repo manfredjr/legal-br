@@ -1,8 +1,8 @@
 # Dados da empresa
 
-Copie este arquivo para `dados-empresa.md` e preencha. O `dados-empresa.md` **não vai para o repositório** — ele fica só na sua máquina.
+Copie este arquivo para `dados-empresa.md` e preencha. O `dados-empresa.md` **não vai para o repositório** - ele fica só na sua máquina.
 
-A skill lê este arquivo antes de redigir contratos, políticas, termos e regulamentos. O que não estiver preenchido aqui vira `[PREENCHER]` no documento produzido — nunca é inventado.
+A skill lê este arquivo antes de redigir contratos, políticas, termos e regulamentos. O que não estiver preenchido aqui vira `[PREENCHER]` no documento produzido - nunca é inventado.
 
 ## Identificação
 
@@ -13,7 +13,7 @@ A skill lê este arquivo antes de redigir contratos, políticas, termos e regula
 | CNPJ | [PREENCHER] |
 | Inscrição estadual | [PREENCHER] |
 | Inscrição municipal | [PREENCHER] |
-| Porte | [PREENCHER — ver Resolução CD/ANPD nº 2/2022 para agente de pequeno porte] |
+| Porte | [PREENCHER - ver Resolução CD/ANPD nº 2/2022 para agente de pequeno porte] |
 
 ## Endereço
 
@@ -41,7 +41,7 @@ A skill lê este arquivo antes de redigir contratos, políticas, termos e regula
 | Encarregado (DPO) | [PREENCHER] |
 | E-mail do encarregado | [PREENCHER] |
 | Encarregado publicado no site | [ ] Sim [ ] Não |
-| Política de privacidade vigente | [PREENCHER — versão e data] |
+| Política de privacidade vigente | [PREENCHER - versão e data] |
 | Prazo padrão de resposta ao titular | [PREENCHER] |
 
 ## Representação
@@ -51,7 +51,7 @@ A skill lê este arquivo antes de redigir contratos, políticas, termos e regula
 | Representante legal | [PREENCHER] |
 | Cargo | [PREENCHER] |
 | CPF | [PREENCHER] |
-| Forma de assinatura | [PREENCHER — ICP-Brasil, assinatura eletrônica avançada, manuscrita] |
+| Forma de assinatura | [PREENCHER - ICP-Brasil, assinatura eletrônica avançada, manuscrita] |
 
 ## Advogado externo
 
@@ -70,7 +70,7 @@ Valores padrão que a empresa já decidiu. Deixe em branco o que ainda for decis
 
 | Campo | Valor |
 |---|---|
-| Titularidade padrão do código | [PREENCHER — cessão ao cliente / licença / caso a caso] |
+| Titularidade padrão do código | [PREENCHER - cessão ao cliente / licença / caso a caso] |
 | Prazo padrão de garantia | [PREENCHER] |
 | Prazo padrão de pagamento | [PREENCHER] |
 | Índice de reajuste | [PREENCHER] |

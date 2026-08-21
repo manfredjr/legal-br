@@ -1,10 +1,10 @@
-# Modelo — documento revisado
+# Modelo - documento revisado
 
 Nome do arquivo de saída: `<nome-do-original>-REVISADO-AAAA-MM-DD.md`
 
 ---
 
-# Revisão — [TÍTULO DO DOCUMENTO]
+# Revisão - [TÍTULO DO DOCUMENTO]
 
 | | |
 |---|---|
@@ -29,11 +29,11 @@ Três a cinco linhas: o que é o documento, em que estado chegou e qual a recome
 
 ## 2. Contexto e premissas
 
-**Fatos confirmados** — o que veio do documento ou foi informado.
+**Fatos confirmados** - o que veio do documento ou foi informado.
 
 - [FATO]
 
-**Hipóteses de trabalho** — o que foi assumido por ausência de informação. Se alguma estiver errada, a análise muda.
+**Hipóteses de trabalho** - o que foi assumido por ausência de informação. Se alguma estiver errada, a análise muda.
 
 - [HIPÓTESE]
 
@@ -41,7 +41,7 @@ Três a cinco linhas: o que é o documento, em que estado chegou e qual a recome
 
 Repita o bloco abaixo para cada cláusula. Cláusula sem problema também entra, como "sem apontamento".
 
-### Cláusula [N] — [TÍTULO]
+### Cláusula [N] - [TÍTULO]
 
 **Texto original**
 
@@ -49,7 +49,7 @@ Repita o bloco abaixo para cada cláusula. Cláusula sem problema também entra,
 
 **Classificação:** FATO LEGAL | INTERPRETAÇÃO | RECOMENDAÇÃO | RISCO | PENDÊNCIA DE VALIDAÇÃO
 
-**Risco:** Alto | Médio | Baixo | —
+**Risco:** Alto | Médio | Baixo | -
 
 **Apontamento**
 
@@ -84,7 +84,7 @@ Pontos que o documento deveria tratar e não trata.
 
 Dados que dependem da empresa ou do cliente e não podem ser inventados.
 
-- [ ] `[PREENCHER]` — [ONDE APARECE E O QUE É]
+- [ ] `[PREENCHER]` - [ONDE APARECE E O QUE É]
 
 ## 6. Requisitos para implementação
 
@@ -96,6 +96,8 @@ Quando o documento estiver ligado a uma funcionalidade de software.
 
 O que o agente **não** conseguiu confirmar. Encaminhado em `[CONSULTA-ADVOGADO-...md]`.
 
+Se não houver nenhuma, escreva "Nenhuma - todos os pontos foram verificados em fonte oficial" e siga em frente. Não invente ressalva para preencher a seção.
+
 | # | Questão | Por que não foi possível concluir | Impacto |
 |---|---|---|---|
 | 1 | [QUESTÃO] | [MOTIVO] | [IMPACTO] |
@@ -106,10 +108,12 @@ O que o agente **não** conseguiu confirmar. Encaminhado em `[CONSULTA-ADVOGADO-
 |---|---|---|---|
 | [NORMA] | [ART.] | `fontes/[CAMINHO]` ou [URL] | [AAAA-MM-DD] |
 
-## 9. Documento revisado — texto integral
+## 9. Documento revisado - texto integral
 
 Versão consolidada, já com as redações propostas aplicadas e os `[PREENCHER]` marcados.
 
 ---
 
-[COLAR AQUI O BLOCO DE templates/aviso-agente-ia.md]
+> **Só se houver pendência:** colar aqui o bloco de `templates/sinalizacao-revisao.md`.
+>
+> Documento sem pendência termina na seção 9. Sem ressalva, sem rodapé, sem aviso de autoria.

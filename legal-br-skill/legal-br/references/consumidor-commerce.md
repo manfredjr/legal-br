@@ -1,8 +1,8 @@
 # Consumidor e comércio eletrônico
 
 Base principal:
-- Código de Defesa do Consumidor — Lei 8.078/1990.
-- Decreto 7.962/2013 — contratação no comércio eletrônico.
+- Código de Defesa do Consumidor - Lei 8.078/1990.
+- Decreto 7.962/2013 - contratação no comércio eletrônico.
 
 ## Checklist
 

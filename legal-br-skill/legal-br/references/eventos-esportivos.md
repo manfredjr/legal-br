@@ -62,5 +62,5 @@ A Lei Geral do Esporte recebeu alterações posteriores à edição de 2023. Sem
 
 ## Fonte
 
-- Lei Geral do Esporte — Lei 14.597/2023:
+- Lei Geral do Esporte - Lei 14.597/2023:
   https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14597.htm
