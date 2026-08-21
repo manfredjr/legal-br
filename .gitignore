@@ -1,0 +1,30 @@
+# Dados da empresa — nunca versionar. Use dados-empresa.exemplo.md como modelo.
+dados-empresa.md
+
+# Biblioteca local de fontes oficiais (~11 MB).
+# Reconstruída com ATUALIZAR-FONTES.bat. Manter no git carregaria texto legal
+# desatualizado no histórico para sempre.
+legal-br-skill/legal-br/fontes/
+
+# Artefatos gerados pelo atualizador
+CHECKSUMS-SHA256.txt
+ULTIMA-ATUALIZACAO.txt
+FALHAS-DOWNLOAD.txt
+*.download
+
+# Saídas de trabalho — contêm material de cliente
+*-REVISADO-*.md
+CONSULTA-ADVOGADO-*.md
+revisoes/
+entrada/
+
+# Documentos recebidos para revisão
+*.docx
+*.doc
+*.pdf
+!legal-br-skill/legal-br/templates/*.md
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
