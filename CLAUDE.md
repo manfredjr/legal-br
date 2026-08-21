@@ -222,6 +222,28 @@ Armadilha registrada: o bloco novo no atualizador tinha um `catch {}` vazio que 
 
 O `SKILL.md` ganhou a secao "Antes de citar a biblioteca local": nenhum arquivo de `fontes/` vale como texto vigente sem consulta ao `STATUS-FONTES.md`, e relatorio com mais de 30 dias conta como vencido.
 
+### 2026-08-21 - Biblioteca convertida para markdown
+
+A biblioteca passou a existir em duas formas. `fontes/` guarda o HTML e o PDF originais e continua sendo a evidencia. `fontes-md/` traz o mesmo conteudo em markdown, com `### Art. N` como ancora.
+
+Dois ganhos. O tamanho cai de 11 MB para 3 MB, porque 65% do HTML do Planalto e marcacao: o `37-anpd-materiais-publicacoes.html` tem 372 KB e apenas 3 KB de texto. E o encoding e corrigido: as paginas do Planalto sao ISO-8859-1, entao um modelo que abre o HTML cru le `Art. 5? Para os fins desta Lei`, com todo acento quebrado justamente no texto que precisa ser citado com precisao.
+
+Conversao perde conteudo em silencio, e num agente juridico isso e pior que HTML feio: um artigo que some do markdown some sem aviso, e a citacao sai incompleta com ar de completa. Por isso `Test-Conversao` compara origem e resultado antes de gravar. Contagem de artigos, paragrafos, revogacoes, notas de redacao, inclusoes e vides tem que bater exatamente. Reprovou, o `.md` nao e escrito.
+
+Tres correcoes durante a implementacao, todas apanhadas pela propria verificacao:
+
+1. Regex com `\º` dentro de classe de caracteres, que nao e escape valido no .NET. Lancava excecao por linha e o laco seguia adiante produzindo lixo.
+2. A base de comparacao removia tag inline inserindo espaco, enquanto o conversor removia sem espaco. `Art.<span>5` virava `Art . 5` de um lado e `Art. 5` do outro, e a contagem divergia sem nada ter se perdido. Comparacao so vale entre iguais: as duas passaram a tratar tag do mesmo jeito.
+3. Tolerancia de volume era so percentual, e reprovava uma pagina de 435 palavras por 9 palavras de diferenca. Ganhou piso absoluto de 20 palavras. As contagens estruturais seguem exatas, que sao a garantia juridica de fato.
+
+Resultado: 29/29 convertidos, zero reprovados.
+
+Ferramentas: PowerShell puro para o HTML, porque depender do Python do Inkscape quebraria no dia da desinstalacao. `pdftotext` do Git for Windows para os PDFs, com fallback silencioso: sem a ferramenta o PDF fica sem `.md`, e Claude e ChatGPT leem PDF nativamente.
+
+O `ATUALIZAR-FONTES` agora baixa, valida, converte e verifica em um comando so.
+
+No `SKILL.md`: comece pelo `fontes-md/` para localizar o artigo, confirme no `fontes/` antes de transcrever texto literal. Norma que aparece em `fontes/` mas nao em `fontes-md/` reprovou de proposito.
+
 ## Pendências conhecidas
 
 - [ ] **ECA Digital ausente das `references/`.** A Lei 15.211/2025 e o Decreto 12.880/2026 estão baixados em `fontes/eca-digital/`, mas `references/menores-imagem.md` ainda só trata de LGPD + ECA de 1990. Lacuna relevante para produtos com menores.

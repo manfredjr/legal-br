@@ -76,7 +76,18 @@ Consulte [references/fontes-oficiais.md](references/fontes-oficiais.md).
 
 ## Biblioteca jurídica local
 
-Esta skill inclui uma cópia local das fontes primárias em `fontes/`. Procure nesses arquivos antes de recorrer a fontes secundárias.
+Esta skill inclui uma cópia local das fontes primárias. Procure nesses arquivos antes de recorrer a fontes secundárias.
+
+A biblioteca existe em duas formas:
+
+| Pasta | O que é | Quando usar |
+|---|---|---|
+| `fontes-md/` | Mesmo conteúdo em markdown, com `### Art. N` como âncora | Leitura e localização do artigo. É por onde começar. |
+| `fontes/` | HTML e PDF originais dos portais oficiais | **A evidência.** Confirme aqui antes de transcrever texto legal literal. |
+
+O markdown é derivado e passou por verificação automática de perda: contagem de artigos, parágrafos, revogações e notas de redação tem que bater com o original. Ainda assim, é conversão. Se as duas formas divergirem, vale o original.
+
+Norma que aparece em `fontes/` mas não em `fontes-md/` reprovou na verificação de propósito. Use o original.
 
 Ordem de consulta:
 

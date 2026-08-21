@@ -135,10 +135,29 @@ if ($falhas.Count -gt 0) {
     Remove-Item (Join-Path $Root "FALHAS-DOWNLOAD.txt") -Force
 }
 
+# Converte para markdown. A verificacao de perda esta dentro do conversor:
+# arquivo que nao passa nao e gravado, e a norma continua legivel no original.
+$conversor = Join-Path $Root 'CONVERTER-FONTES.ps1'
+$conversaoOk = $true
+if (Test-Path $conversor) {
+    Write-Host ""
+    Write-Host "Convertendo a biblioteca para markdown..." -ForegroundColor Cyan
+    Write-Host ""
+    & $conversor
+    if ($LASTEXITCODE -ne 0) { $conversaoOk = $false }
+}
+else {
+    Write-Host "AVISO: CONVERTER-FONTES.ps1 nao encontrado. fontes-md/ nao foi atualizada." -ForegroundColor DarkYellow
+    $conversaoOk = $false
+}
+
 Write-Host ""
 Write-Host "Legal BR - atualização concluída" -ForegroundColor Yellow
 Write-Host "Downloads: $sucesso / $($Fontes.Count)"
 Write-Host "Falhas: $($falhas.Count)"
 if ($falhas.Count -gt 0) {
     Write-Host "Veja FALHAS-DOWNLOAD.txt para baixar manualmente os itens bloqueados." -ForegroundColor Yellow
+}
+if (-not $conversaoOk) {
+    Write-Host "Houve norma sem versão markdown. Use o arquivo original dessas." -ForegroundColor Yellow
 }

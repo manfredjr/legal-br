@@ -4,6 +4,9 @@
 # hash de todos os arquivos de lei.
 legal-br-skill/legal-br/fontes/** -text
 
+# A versao markdown e derivada e feita para leitura: normaliza para LF.
+legal-br-skill/legal-br/fontes-md/** text eol=lf
+
 # Scripts do Windows: CRLF e o esperado.
 *.ps1 text eol=crlf
 *.bat text eol=crlf

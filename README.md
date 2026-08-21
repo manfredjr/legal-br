@@ -26,6 +26,10 @@ A consulta é feita no arquivo oficial, antes de qualquer afirmação. Não há 
 
 A biblioteca vem versionada no repositório, com a data da coleta em `ULTIMA-ATUALIZACAO.txt` e o hash de cada arquivo em `CHECKSUMS-SHA256.txt`. Quem clona recebe o snapshot exato em que as conclusões se apoiaram, sem depender de os portais estarem no ar.
 
+Ela existe em duas formas. Em `fontes/` ficam o HTML e o PDF originais, que são a evidência. Em `fontes-md/` fica o mesmo conteúdo em markdown, com `### Art. N` como âncora: 11 MB viram 3 MB, e o encoding é corrigido. As páginas do Planalto são ISO-8859-1, então um modelo que abre o HTML cru lê `Art. 5� Para os fins desta Lei`.
+
+A conversão passa por verificação de perda antes de gravar: contagem de artigos, parágrafos, revogações e notas de redação tem que bater com o original. Reprovou, o markdown não é escrito e a norma continua legível no arquivo original. Markdown incompleto seria pior que HTML feio, porque a falta é invisível.
+
 Para atualizar, o `ATUALIZAR-FONTES.bat` valida cada download antes de gravar: PDF tem que começar com `%PDF-` e HTML não pode ser página de erro do portal. Essa checagem existe porque portais de governo devolvem página de manutenção com HTTP 200, e um script que confia no código de status salva o erro achando que deu certo.
 
 ### 2. Verificação de atualidade
@@ -119,9 +123,11 @@ legal-br-skill/legal-br/
   templates/                  4 modelos de saida
   dados-empresa.exemplo.md
   FONTES-OFICIAIS.md          catalogo com o link oficial de cada arquivo
-  ATUALIZAR-FONTES.bat/.ps1   baixa e valida as 29 fontes
+  ATUALIZAR-FONTES.bat/.ps1   baixa, valida e converte as 29 fontes
   VERIFICAR-FONTES.bat/.ps1   compara cada fonte com o original
-  fontes/                     29 fontes oficiais, versionadas
+  CONVERTER-FONTES.bat/.ps1   gera fontes-md/ com verificacao de perda
+  fontes/                     29 fontes oficiais (evidencia)
+  fontes-md/                  as mesmas em markdown (leitura)
 ```
 
 ## Limites

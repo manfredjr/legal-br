@@ -22,17 +22,23 @@ legal-br/
   dados-empresa.exemplo.md    modelo dos dados da empresa (copie para dados-empresa.md)
   FONTES-OFICIAIS.md          catalogo das fontes, com link oficial de cada arquivo
   fontes-oficiais.json        mesmo catalogo em formato legivel por script
-  lib-fontes.ps1              funcoes comuns aos dois scripts
+  lib-fontes.ps1              funcoes comuns de download e hash
+  lib-conversao.ps1           funcoes de conversao e verificacao de perda
   ATUALIZAR-FONTES.bat        atalho para rodar o atualizador
   ATUALIZAR-FONTES.ps1        baixa e valida as 29 fontes oficiais
   VERIFICAR-FONTES.bat        atalho para rodar o verificador
   VERIFICAR-FONTES.ps1        compara cada fonte com o original, sem alterar nada
+  CONVERTER-FONTES.bat        atalho para rodar o conversor
+  CONVERTER-FONTES.ps1        gera fontes-md/ e verifica se nao perdeu conteudo
   CHECKSUMS-SHA256.txt        hash de bytes: integridade do arquivo em disco
   CONTEUDO-SHA256.txt         hash do texto legal: e o que o verificador compara
   ULTIMA-ATUALIZACAO.txt      data da ultima coleta e contagem de falhas
   STATUS-FONTES.md            relatorio do verificador (gerado, fora do git)
 
-  fontes/                     biblioteca local (cerca de 11 MB, versionada)
+  fontes-md/                  a mesma biblioteca em markdown (3 MB, leitura)
+    leis/  eca-digital/  anpd/
+
+  fontes/                     originais HTML e PDF (11 MB, evidencia)
     leis/                     12 arquivos: Constituicao, Codigo Civil, CDC, LGPD,
                               Marco Civil, Lei de Software, Direitos Autorais, ECA,
                               Lei Geral do Esporte, comercio eletronico,
