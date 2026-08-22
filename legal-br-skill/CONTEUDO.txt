@@ -28,6 +28,8 @@ legal-br/
   ATUALIZAR-FONTES.ps1        baixa e valida as 29 fontes oficiais
   VERIFICAR-FONTES.bat        atalho para rodar o verificador
   VERIFICAR-FONTES.ps1        compara cada fonte com o original, sem alterar nada
+  VALIDAR-REVISAO.bat         atalho para rodar o validador de saida
+  VALIDAR-REVISAO.ps1         confere a parte mecanica de um documento revisado
   CONVERTER-FONTES.bat        atalho para rodar o conversor
   CONVERTER-FONTES.ps1        gera fontes-md/ e verifica se nao perdeu conteudo
   CHECKSUMS-SHA256.txt        hash de bytes: integridade do arquivo em disco
