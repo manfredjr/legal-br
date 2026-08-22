@@ -6,6 +6,12 @@ dados-empresa.md
 CONSULTA-ADVOGADO-*.md
 revisoes/
 
+# Excecao: a suite de testes e ficticia e nao tem material de cliente.
+# As saidas sao a referencia de regressao. Sem elas os gabaritos nao servem
+# para nada, porque nao ha com o que comparar.
+!testes/*-REVISADO-*.md
+!testes/CONSULTA-ADVOGADO-*.md
+
 # Documentos recebidos para revisao.
 # Coloque tudo que chegar de fora em entrada/, que nao e versionada.
 entrada/

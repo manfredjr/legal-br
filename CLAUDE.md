@@ -26,11 +26,36 @@ LEGAL-BR/
       FONTES-OFICIAIS.md          catalogo com link oficial de cada arquivo
       fontes-oficiais.json
       ATUALIZAR-FONTES.bat/.ps1
+      VERIFICAR-FONTES.bat/.ps1
+      VALIDAR-REVISAO.bat/.ps1    confere a mecanica de um documento revisado
       fontes/                     biblioteca local (29 arquivos, ~11 MB)
         leis/                     12 - Planalto
         eca-digital/              4  - Lei 15.211/2025 e Decreto 12.880/2026
         anpd/                     13 - guias e resolucoes da ANPD
+      fontes-md/                  mesma biblioteca em markdown, ~3 MB
+  testes/                         suite de regressao, 4 casos ficticios
 ```
+
+### Suíte de testes
+
+Quatro casos, cobrindo os dois tipos de erro. Cada um tem documento, gabarito, revisão de referência e, quando há pendência, a consulta gerada.
+
+| Caso | Mede |
+|---|---|
+| `termos-de-uso-exemplo.md` | Recall: 14 problemas plantados |
+| `politica-privacidade-exemplo.md` | Falso positivo: documento correto, 7 armadilhas, tem que sair limpo |
+| `contrato-desenvolvimento-exemplo.md` | B2B: 6 problemas, 5 armadilhas em que o CDC não incide |
+| `regulamento-torneio-exemplo.md` | Menores: 7 problemas, dado sensível, ECA Digital que não incide |
+
+Para conferir a mecânica de uma saída:
+
+```bash
+VALIDAR-REVISAO.bat testes/termos-de-uso-exemplo-REVISADO-2026-08-21.md testes/termos-de-uso-exemplo.md
+```
+
+O validador não avalia mérito jurídico. Ele checa cobertura, elementos da regra de evidência, consistência de contagem, sinalização e regras de caractere. Incidência das normas e falso positivo continuam sendo leitura humana, e é para isso que servem os gabaritos.
+
+Abra o gabarito só depois de rodar a análise. Quem lê antes não está testando nada.
 
 ## Como trabalhar neste repositório
 
@@ -87,6 +112,7 @@ Um trailer que escapa é caro de tirar: obriga a reescrever o histórico com `fi
 3. **`fontes/` é versionada**, junto com `CHECKSUMS-SHA256.txt` e `ULTIMA-ATUALIZACAO.txt`. São 10,4 MB e o maior arquivo tem 1,8 MB, bem abaixo dos limites do GitHub. O snapshot é a evidência em que as conclusões se apoiam, e o checksum só prova integridade se os arquivos medidos estiverem versionados junto. Reconstruir por script depende de os portais estarem no ar e das URLs não mudarem, e as duas coisas já falharam aqui.
    Convenção: só commite a biblioteca quando o `CHECKSUMS` mudar de fato. PDF é binário e não faz delta no git.
 4. Documentos revisados (`*-REVISADO-*.md`) e consultas (`CONSULTA-ADVOGADO-*.md`) contêm material de cliente - também ficam fora.
+   Exceção: `testes/` é versionada por inteiro, saídas incluídas. Os documentos são fictícios, e sem as saídas os gabaritos não servem de regressão, porque não há com o que comparar. A exceção tem escopo explícito no `.gitignore`. Nunca coloque documento de cliente em `testes/`.
 
 ## Como o agente opera
 
@@ -244,10 +270,47 @@ O `ATUALIZAR-FONTES` agora baixa, valida, converte e verifica em um comando so.
 
 No `SKILL.md`: comece pelo `fontes-md/` para localizar o artigo, confirme no `fontes/` antes de transcrever texto literal. Norma que aparece em `fontes/` mas nao em `fontes-md/` reprovou de proposito.
 
+### 2026-08-21 - Regra de incidência, falso positivo e suíte de testes
+
+Rodar a skill num documento de teste de verdade expôs um buraco no desenho, e a correção mexeu em quatro frentes.
+
+**O buraco.** A regra de evidência exigia norma, artigo, arquivo e data. Os quatro provam que a norma **existe**; nenhum prova que ela **alcança o caso**. Dispositivo real, vigente, verificado em fonte oficial e aplicado a situação que ele não regula passa em toda conferência de citação e continua errado.
+
+O caso concreto: a Lei 15.211/2025 veda a autodeclaração de idade no art. 9º, § 1º. Norma real, em vigor, na biblioteca. Mas o § 2º limita a vedação a conteúdo pornográfico ou proibido em lei, e os arts. 17 a 19 do Decreto 12.880/2026 seguem a mesma delimitação. Aplicar isso a um app de reserva de quadras é criar obrigação inexistente com as credenciais em ordem. Só não passou porque o parágrafo restritivo estava logo abaixo do citado.
+
+Entrou a **hipótese de incidência** como quarto elemento, em dois níveis: premissas declaradas uma vez na seção de contexto (há relação de consumo, há menores, é contrato entre empresas) e incidência ponto a ponto quando o artigo tem escopo próprio. A primeira versão da regra exigia justificar em cada ponto, o que fazia repetir a mesma premissa nove vezes - foi corrigida antes de entrar.
+
+Sinal prático de que o nível 2 é obrigatório: "para os fins desta Lei", "consideram-se", "aplica-se a", "desde que", ou parágrafo que restringe o caput.
+
+**O erro que a skill não tratava.** Toda a calibragem era contra deixar passar cláusula abusiva. Nada cobria o inverso: afirmar obrigação que não existe. É o erro mais caro - a empresa gasta com exigência inventada, o advogado externo perde a confiança no material e revisa tudo de novo, e ninguém descobre depois, porque o documento só fica mais restritivo do que precisava.
+
+Entrou a seção "Os dois erros", com a tabela "Cláusula que parece problema e não é": limitação de responsabilidade entre empresas, eleição de foro em contrato paritário, cessão patrimonial de software, retenção longa com obrigação legal, tratamento sem consentimento. A regra passou a ser dupla: na dúvida sobre **validade**, escalone; na dúvida sobre **incidência**, não afirme.
+
+**Verificação da saída.** O fluxo tinha 10 passos e terminava em entregar. Ganhou o passo 11 com checklist, e `VALIDAR-REVISAO.ps1` para a parte mecânica: cobertura, evidência, consistência de contagem, sinalização e regras de caractere. Caminho negativo testado com 9 mutações, todas detectadas, com caso de controle passando limpo.
+
+O validador pagou na hora: achou tabela de severidade divergente em duas das quatro revisões. É erro recorrente e tem causa estrutural - a tabela fica no topo e a análise que a alimenta vem depois. Ficou registrado no `SKILL.md`: preencher a tabela por último.
+
+**Suíte de testes.** De um documento para quatro, cobrindo os dois tipos de erro:
+
+| Teste | O que exercita |
+|---|---|
+| `termos-de-uso-exemplo.md` | 14 problemas plantados. Mede recall |
+| `politica-privacidade-exemplo.md` | **Nenhum problema.** 7 armadilhas de falso positivo. Mede se documento correto sai limpo |
+| `contrato-desenvolvimento-exemplo.md` | B2B: 6 problemas e 5 armadilhas em que o CDC não incide |
+| `regulamento-torneio-exemplo.md` | Menores: 7 problemas, dado sensível, e a armadilha de aplicar o ECA Digital a evento presencial |
+
+O teste 2 é o que valida o desenho central do projeto. Sem ele não havia como medir "o agente é um filtro", só o contrário.
+
+As saídas dos testes passaram a ser versionadas, com exceção com escopo no `.gitignore`. A regra que barra `*-REVISADO-*.md` existe por causa de material de cliente, e teste fictício não é. Sem as saídas, os gabaritos não servem de regressão, porque não há com o que comparar.
+
+Achado de bônus do teste 3: o gabarito original dizia que a cessão da cláusula de PI feria os direitos morais do art. 27 da Lei 9.610. Está errado por excesso. A Lei 9.609, art. 2º, § 1º, afasta os direitos morais do software, ressalvados só a paternidade e a oposição a alteração deformante. A cessão patrimonial é válida; falta ressalvar os dois remanescentes. O gabarito foi corrigido.
+
+`references/menores-imagem.md` reescrita: três camadas (capacidade civil, LGPD, ECA Digital), distinção criança x adolescente do art. 2º do ECA, e o alerta sobre o alcance da vedação de autodeclaração.
+
 ## Pendências conhecidas
 
-- [ ] **ECA Digital ausente das `references/`.** A Lei 15.211/2025 e o Decreto 12.880/2026 estão baixados em `fontes/eca-digital/`, mas `references/menores-imagem.md` ainda só trata de LGPD + ECA de 1990. Lacuna relevante para produtos com menores.
-- [ ] **Marco Civil** citado apenas como link. Sem cobertura de guarda de registros de acesso (art. 15) nem de responsabilidade de provedor.
+- [ ] **Marco Civil** ainda sem roteiro próprio de responsabilidade de provedor. A guarda de registros do art. 15 passou a ser exercitada nos testes 2 e 4, mas continua fora das `references/`.
 - [ ] **LGPD**: legítimo interesse, RIPD e ROPA sem roteiro próprio nas `references/`, embora os guias da ANPD estejam na biblioteca local.
 - [ ] **Acessibilidade digital** (LBI, Lei 13.146/2015) fora do escopo atual.
-- [ ] `SKILL.md` cresceu para ~450 linhas e duplica parte das `references/`. Custo de contexto em toda invocação - vale enxugar movendo as listas longas.
+- [ ] `SKILL.md` foi a 577 linhas com a regra de incidência e a seção dos dois erros. Duplica parte das `references/` e custa contexto em toda invocação. Enxugar movendo as listas longas ficou mais urgente, não menos.
+- [ ] Nenhum teste da suíte foi executado às cegas por terceiro. Autor e corretor foram o mesmo agente, o que mede mecânica e não descoberta.
