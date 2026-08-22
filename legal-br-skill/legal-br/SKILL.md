@@ -42,9 +42,41 @@ Para cada ponto classificado como **FATO LEGAL**, registre:
 
 - norma e artigo (ex.: LGPD, art. 7º, IX);
 - onde foi verificado - arquivo em `fontes/` ou URL oficial;
-- data da verificação.
+- data da verificação;
+- **hipótese de incidência** - por que essa norma alcança estes fatos.
 
 Se não conseguir localizar a norma na biblioteca local nem em fonte oficial online, o ponto **não é FATO LEGAL**. Reclassifique como **PENDÊNCIA DE VALIDAÇÃO** e leve para o arquivo de consulta ao advogado externo.
+
+### Incidência: o quarto elemento
+
+Os três primeiros elementos provam que a norma **existe**. Nenhum deles prova que ela **alcança o caso**, e é aí que mora o erro mais difícil de pegar depois: dispositivo real, vigente, verificado em fonte oficial, aplicado a uma situação que ele não regula. Passa em toda conferência de citação e mesmo assim está errado.
+
+A incidência se registra em dois níveis. Repetir a mesma justificativa em cada ponto vira ruído e ninguém lê.
+
+**Nível 1 - premissas de incidência, declaradas uma vez.** Alguns fatos acionam corpos inteiros de norma. Liste-os na seção de contexto e premissas, cada um com o fundamento e o motivo:
+
+| Premissa | O que aciona | Como justificar |
+|---|---|---|
+| Há relação de consumo | CDC inteiro | Quem é fornecedor e quem é destinatário final, nos termos dos arts. 2º e 3º |
+| Há tratamento de dados pessoais | LGPD | Quais dados, de quem, por quem |
+| Há crianças ou adolescentes | ECA, ECA Digital, LGPD art. 14 | Por que o produto é direcionado a eles ou de acesso provável |
+| Há oferta ou contratação online | Decreto nº 7.962/2013 | Onde ocorre a oferta e a conclusão do contrato |
+| É contrato entre empresas | Regime civil, e **não** o CDC | Por que não há destinatário final |
+
+Premissa que não se sustenta derruba tudo que se apoiava nela. Se o enquadramento for duvidoso, ele é a PENDÊNCIA DE VALIDAÇÃO - e a análise segue com a premissa declarada como hipótese.
+
+**Nível 2 - incidência do dispositivo, ponto a ponto.** Obrigatória quando o artigo tem escopo próprio, mais estreito que a premissa geral. Nesse caso:
+
+1. **Leia a cláusula de escopo.** Muito artigo delimita o próprio alcance no caput, num parágrafo seguinte, ou no artigo que define os termos empregados. Transcreva junto com o dispositivo - não basta citar a regra sem a condição que a aciona.
+2. **Confirme o enquadramento fático.** A regra fala em criança, provedor de aplicação, agente de pequeno porte, rede social, conteúdo impróprio? Diga por que o caso se encaixa. Se não se encaixar, o dispositivo não entra.
+3. **Não estenda por semelhança de assunto.** Norma sobre tema próximo não é norma sobre o caso. Analogia é interpretação e vai rotulada como INTERPRETAÇÃO, nunca como FATO LEGAL.
+4. **Verifique a vigência quando for material.** Lei publicada não é lei em vigor. Procure a cláusula de vigência e registre a data.
+
+Sinal prático de que o nível 2 é obrigatório: o artigo, ou o artigo vizinho, contém "para os fins desta Lei", "consideram-se", "aplica-se a", "desde que", ou um parágrafo que restringe o caput.
+
+Exemplo do erro que esta regra existe para impedir: a Lei nº 15.211/2025 (ECA Digital) veda a autodeclaração de idade no art. 9º, § 1º. Norma real, em vigor, na biblioteca local. Mas o § 2º do mesmo artigo limita a vedação a conteúdo pornográfico ou proibido em lei, e os arts. 17 a 19 do Decreto nº 12.880/2026 seguem a mesma delimitação. Aplicar essa vedação a um aplicativo comum de reserva de quadras seria criar obrigação inexistente com três credenciais em ordem.
+
+Quando o enquadramento em si for duvidoso, ele é a PENDÊNCIA DE VALIDAÇÃO - não a existência da norma.
 
 Nunca:
 
@@ -57,6 +89,39 @@ Nunca:
 Citação de texto legal é transcrição literal da fonte aberta, entre aspas ou em bloco, com o artigo identificado. Paráfrase é interpretação e deve ser rotulada como tal.
 
 Na dúvida entre afirmar e escalonar, escalone.
+
+## Os dois erros, e por que o segundo é pior
+
+O agente erra de duas formas, e elas puxam para lados opostos.
+
+**Deixar passar.** Cláusula abusiva que não foi apontada. É o erro que todo mundo espera, e o mais fácil de medir: basta comparar com uma lista do que deveria ter sido achado.
+
+**Apontar o que não existe.** Afirmar obrigação que a lei não impõe, ou apontar como ilegal cláusula que é válida. Não aparece em nenhuma conferência de citação, porque as citações estão certas - o que está errado é o alcance delas.
+
+O segundo é o que custa mais caro, por três motivos. A empresa gasta com exigência inventada. O advogado externo que recebe a consulta perde a confiança no material, e a partir daí revisa tudo de novo, o que anula a razão de existir do agente. E, ao contrário da cláusula esquecida, ninguém descobre o erro depois - o documento simplesmente fica mais restritivo do que precisava, sem que nada acuse.
+
+Por isso não vale a regra "na dúvida, aponte". As duas regras corretas são:
+
+- Na dúvida sobre a **validade** de uma cláusula, escalone para o advogado.
+- Na dúvida sobre a **incidência** de uma norma, não afirme. Ou você mostra por que ela alcança o caso, ou ela não entra.
+
+E o cuidado que fecha isso: nem toda cláusula desequilibrada é ilegal. Contrato entre empresas admite limitação de responsabilidade, eleição de foro e cessão ampla de direitos que seriam nulas em relação de consumo. Antes de apontar abuso, confirme que existe relação de consumo. Se não existir, diga que não existe e analise pelo regime civil.
+
+### Cláusula que parece problema e não é
+
+Situações em que a leitura apressada acusa erro onde não há:
+
+| Aparência | Quando é legítimo |
+|---|---|
+| Limitação de responsabilidade | Contrato entre empresas, fora de relação de consumo. O CDC, art. 51, I, admite limitação em situações justificáveis mesmo quando o consumidor é pessoa jurídica |
+| Eleição de foro com renúncia a outro | Contrato paritário entre empresas |
+| Cessão total e definitiva de direitos patrimoniais de autor sobre software | Lei nº 9.609/1998 e Lei nº 9.610/1998 admitem a cessão do patrimonial; o que não se cede é o direito moral |
+| Prazo de retenção longo | Quando houver obrigação legal ou regulatória que o justifique, nos termos da LGPD, art. 16, I |
+| Tratamento sem consentimento | O consentimento é uma das dez hipóteses do art. 7º, não a regra. Execução de contrato e obrigação legal dispensam consentimento |
+| Reajuste anual por índice | Cláusula comum e válida, desde que o índice esteja identificado |
+| Multa por rescisão antecipada | Válida quando proporcional e recíproca |
+
+Nenhuma dessas entra como achado sem que se demonstre, no caso concreto, o que a torna abusiva.
 
 ## Hierarquia de fontes
 
@@ -377,10 +442,54 @@ Passos:
 8. Consolide a lista de PENDÊNCIAS DE VALIDAÇÃO.
 9. Havendo pendências: gere o arquivo de consulta ao advogado externo e inclua o bloco de sinalização.
 10. Não havendo pendências: entregue o documento limpo, sem ressalva.
+11. **Verifique a própria saída antes de entregar**, conforme a checklist abaixo.
 
 Cláusula sem problema também é registrada, como "sem apontamento" - o cliente precisa saber que ela foi lida.
 
 Estrutura: [templates/documento-revisado.md](templates/documento-revisado.md).
+
+### Verificação antes de entregar
+
+O passo 11 não é opcional. Análise longa acumula erro de contagem e citação solta, e os dois passam despercebidos justamente porque o texto parece completo.
+
+Confira, nesta ordem:
+
+**Cobertura**
+
+- [ ] O número de cláusulas analisadas bate com o número de cláusulas do original. Nenhuma foi pulada.
+- [ ] Toda cláusula com problema tem redação substitutiva. Apontar sem redigir não fecha o passo 5.
+- [ ] Toda cláusula sem problema está registrada como "sem apontamento".
+
+**Evidência**
+
+- [ ] Todo FATO LEGAL tem norma, artigo, arquivo ou URL, data e hipótese de incidência.
+- [ ] Todo dispositivo com cláusula de escopo teve o escopo lido e transcrito.
+- [ ] Nenhum artigo foi citado sem abrir a fonte.
+- [ ] O que é analogia ou leitura própria está rotulado como INTERPRETAÇÃO, não como FATO LEGAL.
+- [ ] A biblioteca local foi conferida no `STATUS-FONTES.md`, e o relatório tem menos de 30 dias.
+
+**Falso positivo**
+
+- [ ] Cada achado foi conferido contra a tabela "Cláusula que parece problema e não é".
+- [ ] Se a análise assume relação de consumo, essa premissa está declarada e justificada.
+
+**Consistência interna**
+
+- [ ] A contagem de pendências bate entre a seção de pendências, o bloco de sinalização e o número de questões da consulta.
+- [ ] Os totais por severidade batem com os achados da análise cláusula a cláusula.
+
+> **Erro recorrente, registrado porque se repete.** A tabela de severidade do resumo executivo fica no início do documento e a análise que a alimenta vem depois. Quem preenche a tabela antes de fechar as classificações erra a contagem, e o texto continua parecendo coerente, porque ninguém soma nove cláusulas ao ler.
+>
+> Preencha a tabela **por último**, contando as classificações já escritas. O mesmo vale para o número de pendências, que aparece em três lugares: a seção de pendências, o bloco de sinalização e a consulta.
+- [ ] Todo `[PREENCHER]` do texto consolidado aparece na lista de campos a preencher.
+- [ ] Nenhum dado de empresa foi inventado. O que não está em `dados-empresa.md` é `[PREENCHER]`.
+
+**Sinalização**
+
+- [ ] Havendo pendência, o bloco nomeia o ponto e existe arquivo de consulta correspondente.
+- [ ] Não havendo pendência, o documento sai sem ressalva de qualquer tipo.
+
+Para conferir a parte mecânica, execute `VALIDAR-REVISAO.bat <arquivo-revisado.md>`. Ele checa contagem, consistência e formato, e não substitui a leitura dos itens de evidência e falso positivo, que só a análise resolve.
 
 ## O agente é um filtro
 
